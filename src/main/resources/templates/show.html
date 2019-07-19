@@ -5,6 +5,10 @@
     <title>Contact Details</title>
 </head>
 <body>
-    <span th:text="${contact.mobileNumber}"></span>
+    <div>
+        <p>Name: <span th:text="${contact.getFullName()}"></span></p>
+        <p>Mobile: <span th:text="${contact.getMobileNumber()}"></span></p>
+        <p>Email: <span th:text="${contact.getEmail()}"></span></p>
+    </div>
 </body>
 </html>

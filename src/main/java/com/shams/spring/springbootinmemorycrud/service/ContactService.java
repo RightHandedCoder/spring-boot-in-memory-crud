@@ -29,7 +29,7 @@ public class ContactService {
         }
     }
 
-    public Optional<Contact> getContactById(Long id) {
-        return contactRepository.findById(id);
+    public Contact getContactById(Long id) {
+        return contactRepository.findById(id).get();
     }
 }
