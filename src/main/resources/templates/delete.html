@@ -10,7 +10,7 @@
         <span>Are you sure you want to delete the following contact?</span>
         <p th:text="${contact.getFullName()}"></p>
         <input type="submit" value="Yes">
-        <input type="button" value="No">
+        <a th:href="@{/contacts}">No</a>
     </form>
 </div>
 </body>
