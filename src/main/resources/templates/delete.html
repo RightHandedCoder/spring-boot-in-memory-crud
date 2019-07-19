@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Contact</title>
+</head>
+<body>
+<div>
+    <form action="#" th:action="@{/delete/{id}(id=${contact.id})}" th:object="${contact}" method="post">
+        <span>Are you sure you want to delete the following contact?</span>
+        <p th:text="${contact.getFullName()}"></p>
+        <input type="submit" value="Yes">
+        <input type="button" value="No">
+    </form>
+</div>
+</body>
+</html>

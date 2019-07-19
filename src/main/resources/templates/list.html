@@ -5,9 +5,13 @@
     <title>Contacts</title>
 </head>
 <body>
+    <a th:href="@{/create}">Create</a>
     <ul>
         <li th:each="contact: ${contacts}">
-            <a th:href="@{|/details?id=${contact.getId()}|}" th:text="${contact.getFullName()}"></a>
+            <span th:text="${contact.getFullName()}"></span>
+            <a th:href="@{|/details/${contact.getId()}|}">View</a>
+            <a th:href="@{|/edit/${contact.getId()}|}">Edit</a>
+            <a th:href="@{|/delete/${contact.getId()}|}">Delete</a>
         </li>
     </ul>
 </body>

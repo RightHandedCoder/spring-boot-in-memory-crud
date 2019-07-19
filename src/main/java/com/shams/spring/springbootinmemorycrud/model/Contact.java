@@ -30,6 +30,10 @@ public class Contact {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -72,11 +76,17 @@ public class Contact {
 
     }
 
-    public Boolean validate() throws Exception{
+    public Boolean validate() throws Exception {
         if (this.firstName.isEmpty() && this.lastName.isEmpty())
             throw new Exception("First Name or Last Name required!!");
         if (this.mobileNumber.isEmpty())
             throw new Exception("Mobile number can not be empty!!");
         return true;
+    }
+
+    public Boolean validateUpdate() throws Exception {
+        if (this.id == null)
+            throw new Exception("Unable to update!!");
+        return this.validate();
     }
 }

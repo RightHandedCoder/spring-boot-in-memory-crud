@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ContactService {
@@ -29,7 +28,22 @@ public class ContactService {
         }
     }
 
+    public void updateContact(Contact contact) {
+        try {
+            if (contact.validateUpdate()) {
+                contactRepository.save(contact);
+            }
+        }
+        catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public Contact getContactById(Long id) {
         return contactRepository.findById(id).get();
+    }
+
+    public void deleteContact(Long id) {
+        contactRepository.deleteById(id);
     }
 }

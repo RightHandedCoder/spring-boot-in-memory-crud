@@ -5,9 +5,7 @@ import com.shams.spring.springbootinmemorycrud.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HomeController {
@@ -15,34 +13,55 @@ public class HomeController {
     @Autowired
     private ContactService contactService;
 
-    @RequestMapping("/index")
-    public String index() {
-        return "index";
-    }
-
-    @RequestMapping("/contacts")
+    @GetMapping("/contacts")
     public String list(Model model) {
         model.addAttribute("contacts", contactService.getAllContacts());
         return "list";
     }
 
-    @RequestMapping("details")
-    public String show(@RequestParam Long id, Model model) {
+    @GetMapping("/details/{id}")
+    public String show(@PathVariable("id") Long id, Model model) {
         model.addAttribute("contact", contactService.getContactById(id));
         return "show";
     }
 
-    @RequestMapping(value = "create", method = RequestMethod.GET)
+    @GetMapping("create")
     public String createForm(Model model) {
         model.addAttribute("contact", new Contact());
         return "create";
     }
 
-    @RequestMapping(value = "create", method = RequestMethod.POST)
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("contact", contactService.getContactById(id));
+        return "edit";
+    }
+
+    @PostMapping("/edit")
+    public String edit(Contact contact) {
+        contactService.updateContact(contact);
+        return "redirect:/contacts";
+    }
+
+    @PostMapping("/create")
     public String create(Contact contact) {
         contactService.createNewContact(contact);
-        return "redirect:contacts";
+        return "redirect:/contacts";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteForm(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("contact", contactService.getContactById(id));
+        return "delete";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        contactService.deleteContact(id);
+        return "redirect:/contacts";
+    }
+
+
 
 
 }
