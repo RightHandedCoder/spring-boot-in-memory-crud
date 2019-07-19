@@ -7,7 +7,7 @@
 <body>
     <ul>
         <li th:each="contact: ${contacts}">
-            <a href="" th:text="${contact.getFullName()}"></a>
+            <a th:href="@{|/details?id=${contact.getId()}|}" th:text="${contact.getFullName()}"></a>
         </li>
     </ul>
 </body>

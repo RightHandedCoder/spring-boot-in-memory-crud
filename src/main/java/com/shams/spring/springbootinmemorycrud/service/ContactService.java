@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContactService {
@@ -26,5 +27,9 @@ public class ContactService {
         catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public Optional<Contact> getContactById(Long id) {
+        return contactRepository.findById(id);
     }
 }
